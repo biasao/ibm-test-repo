@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
+
+	<persistence-unit name="recordsPU">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<class>com.ibm.watson.test.entities.Phone</class>
+		<class>com.ibm.watson.test.entities.Parent</class>
+		<class>com.ibm.watson.test.entities.Patient</class>
+		<class>com.ibm.watson.test.entities.Professional</class>
+		<class>com.ibm.watson.test.entities.School</class>
+		<class>com.ibm.watson.test.entities.UserProfile</class>
+		<class>com.ibm.watson.test.entities.InfantRecord</class>
+	</persistence-unit>
+</persistence>
