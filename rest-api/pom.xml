@@ -9,7 +9,7 @@
 		<version>1.0</version>
 	</parent>
 	<artifactId>rest-api</artifactId>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 	<name>rest-api</name>
 	
 	<properties>
