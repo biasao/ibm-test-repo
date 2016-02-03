@@ -13,11 +13,6 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.ibm.watson.test</groupId>
-			<artifactId>config</artifactId>
-			<version>1.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.ibm.watson.test</groupId>
 			<artifactId>utilities</artifactId>
 			<version>1.0</version>
 		</dependency>

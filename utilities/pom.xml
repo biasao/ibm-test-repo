@@ -12,21 +12,4 @@
 	<artifactId>utilities</artifactId>
 	<name>utilities</name>
 	<description>utilities</description>
-	<dependencies>
-		<dependency>
-			<groupId>com.ibm.watson.test</groupId>
-			<artifactId>config</artifactId>
-			<version>1.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.pdfbox</groupId>
-			<artifactId>pdfbox</artifactId>
-			<version>1.8.8</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.pdfbox</groupId>
-			<artifactId>pdfbox-lucene</artifactId>
-			<version>1.8.8</version>
-		</dependency>
-	</dependencies>
 </project>
