@@ -28,4 +28,5 @@ public class InfantPersonalityAnalisysServiceBean implements PersonalityAnalisys
 	    
 	    return service.getProfile(inputText);
 	}
+	    
 }
