@@ -63,7 +63,7 @@ public class InfantRecordController {
     ResponseEntity<?> personalityInsight(@PathVariable String inputText) {
     	
 		try {
-			logger.info("analysing infant personality on input text: {}", inputText);
+			System.out.println("analysing infant personality on input text: {}" + inputText);
 			Profile profile = this.personalityAnalisysService.analysePersonality(inputText);
 	    	
 	    	return new ResponseEntity(profile, HttpStatus.OK);
