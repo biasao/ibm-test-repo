@@ -16,5 +16,10 @@
 			<artifactId>utilities</artifactId>
 			<version>1.0</version>
 		</dependency>
+		<dependency>
+			<groupId>com.ibm.watson.developer_cloud</groupId>
+			<artifactId>java-wrapper</artifactId>
+			<version>1.0.2</version>
+		</dependency>
 	</dependencies>
 </project>
