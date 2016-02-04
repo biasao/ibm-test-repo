@@ -12,13 +12,13 @@ import com.ibm.watson.health.utilities.service.exception.DomainComponentExceptio
 import com.ibm.watson.health.utilities.service.impl.AbstractCrudService;
 
 @Named
-public class InfantRecordServiceBean extends AbstractCrudService<InfantRecord, Long> implements InfantRecordService {
+public class InfantRecordServiceBean extends AbstractCrudService<InfantRecord, String> implements InfantRecordService {
 
 	@Inject
 	private InfantRecordRepository repository;
 	
 	@Override
-	public CrudRepository<InfantRecord, Long> getCrudRepository()
+	public CrudRepository<InfantRecord, String> getCrudRepository()
 			throws DomainComponentException {
 		
 		return repository;
