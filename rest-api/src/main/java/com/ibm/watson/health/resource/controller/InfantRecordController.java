@@ -73,7 +73,7 @@ public class InfantRecordController {
 	    @ApiResponses(value = { @ApiResponse(code = ResourceConstants.CODE_401, message = ResourceConstants.CODE_401_TEXT ),
 	            @ApiResponse(code = ResourceConstants.CODE_403, message = ResourceConstants.CODE_403_TEXT ),
 	            @ApiResponse(code = ResourceConstants.CODE_404, message = "Profile could not be found.") })
-    ResponseEntity<?> personalityInsight(@PathVariable String inputText) {
+    Profile personalityInsight(@PathVariable String inputText) {
     	
 		try {
 			logger.debug("analysing infant personality on input text: {}", inputText);
@@ -81,12 +81,12 @@ public class InfantRecordController {
 			
 			if (profile == null) {
 				logger.debug("resulting analysis profile for input text is null");
-				return new ResponseEntity(HttpStatus.NOT_FOUND);
+				return null;
 			}
 	    	
-	    	return new ResponseEntity(profile, HttpStatus.OK);
+	    	return profile;
 		} catch (DomainComponentException e) {
-			return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+			return null;
 		}
 	}
     
