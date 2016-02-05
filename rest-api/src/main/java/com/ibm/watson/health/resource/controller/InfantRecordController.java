@@ -79,7 +79,7 @@ public class InfantRecordController {
 	}
     
     @SuppressWarnings({ "unchecked", "rawtypes" })
-    @RequestMapping(value = "/{inputText}", method = RequestMethod.GET)
+    @RequestMapping(value = "/translate/{inputText}", method = RequestMethod.GET)
     ResponseEntity<?> translateText(@PathVariable String inputText) {
     	
 		try {
