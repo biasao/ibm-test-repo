@@ -1,5 +1,9 @@
 package com.ibm.watson.health.resource.controller;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 import java.util.List;
 
 import javax.inject.Inject;
@@ -18,15 +22,12 @@ import com.ibm.watson.developer_cloud.concept_insights.v2.model.Annotations;
 import com.ibm.watson.developer_cloud.language_translation.v2.model.TranslationResult;
 import com.ibm.watson.developer_cloud.personality_insights.v2.model.Profile;
 import com.ibm.watson.health.entity.InfantRecord;
+import com.ibm.watson.health.service.ConceptInsightsService;
 import com.ibm.watson.health.service.InfantRecordService;
 import com.ibm.watson.health.service.PersonalityAnalisysService;
 import com.ibm.watson.health.service.TranslateService;
-import com.ibm.watson.health.service.ConceptInsightsService;
 import com.ibm.watson.health.utilities.service.ResourceConstants;
 import com.ibm.watson.health.utilities.service.exception.DomainComponentException;
-import com.wordnik.swagger.annotations.ApiOperation;
-import com.wordnik.swagger.annotations.ApiResponse;
-import com.wordnik.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping("/infantRecord")
