@@ -24,5 +24,12 @@
 			<artifactId>utilities</artifactId>
 			<version>1.0</version>
 		</dependency>
+		
+		<!-- Swagger api UI -->
+		<dependency>
+		    <groupId>io.springfox</groupId>
+		    <artifactId>springfox-swagger-ui</artifactId>
+		    <version>2.3.1</version>
+		</dependency>
 	</dependencies>
 </project>
