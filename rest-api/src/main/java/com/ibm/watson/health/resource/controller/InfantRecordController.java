@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ibm.watson.developer_cloud.language_translation.v2.model.TranslationResult;
 import com.ibm.watson.developer_cloud.personality_insights.v2.model.Profile;
 import com.ibm.watson.health.entity.InfantRecord;
 import com.ibm.watson.health.service.InfantRecordService;
@@ -72,6 +73,25 @@ public class InfantRecordController {
 			}
 	    	
 	    	return new ResponseEntity(profile, HttpStatus.OK);
+		} catch (DomainComponentException e) {
+			return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+    
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+    @RequestMapping(value = "/{inputText}", method = RequestMethod.GET)
+    ResponseEntity<?> translateText(@PathVariable String inputText) {
+    	
+		try {
+			logger.debug("analysing infant personality on input text: {}", inputText);
+			TranslationResult translationResult = this.personalityAnalisysService.translateText(inputText);
+			
+			if (translationResult == null) {
+				logger.debug("resulting analysis profile for input text is null");
+				return new ResponseEntity(HttpStatus.NO_CONTENT);
+			}
+	    	
+	    	return new ResponseEntity(translationResult, HttpStatus.OK);
 		} catch (DomainComponentException e) {
 			return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
