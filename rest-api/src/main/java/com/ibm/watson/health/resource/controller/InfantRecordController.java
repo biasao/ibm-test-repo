@@ -30,80 +30,93 @@ import com.wordnik.swagger.annotations.ApiResponses;
 @RequestMapping("/infantRecord")
 public class InfantRecordController {
 
-    @Inject
-    private InfantRecordService infantRecordService;
-    
-    @Inject
-    private PersonalityAnalisysService personalityAnalisysService;
-    
-    @Inject
-    private TranslateService translateService;
-    
-    private static Logger logger =  LoggerFactory.getLogger(InfantRecordController.class);
-    
-    @SuppressWarnings({ "unchecked", "rawtypes" })
+	@Inject
+	private InfantRecordService infantRecordService;
+
+	@Inject
+	private PersonalityAnalisysService personalityAnalisysService;
+
+	@Inject
+	private TranslateService translateService;
+
+	private static Logger logger = LoggerFactory
+			.getLogger(InfantRecordController.class);
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@RequestMapping(method = RequestMethod.POST)
 	ResponseEntity<?> add(@RequestBody InfantRecord infantRecord) {
-    	
+
 		try {
 			this.infantRecordService.save(infantRecord);
-			    	
-	    	return new ResponseEntity(null, HttpStatus.CREATED);
+
+			return new ResponseEntity(null, HttpStatus.CREATED);
 		} catch (DomainComponentException e) {
 			return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-    
-    @SuppressWarnings({ "unchecked", "rawtypes" })
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@RequestMapping(method = RequestMethod.GET)
 	ResponseEntity<?> readAll() {
-    	
+
 		try {
-			List<InfantRecord> infantRecords = this.infantRecordService.listAll();
-	    	
-	    	return new ResponseEntity(infantRecords, HttpStatus.OK);
+			List<InfantRecord> infantRecords = this.infantRecordService
+					.listAll();
+
+			return new ResponseEntity(infantRecords, HttpStatus.OK);
 		} catch (DomainComponentException e) {
 			return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-    
-    @SuppressWarnings({ "unchecked", "rawtypes" })
-    @RequestMapping(value = "/{inputText}", method = RequestMethod.GET)
-	@ApiOperation(value = "List all DTCs by id" , notes = "Returns a DTC", response = Profile.class, responseContainer = "Profile" )
-	    @ApiResponses(value = { @ApiResponse(code = ResourceConstants.CODE_401, message = ResourceConstants.CODE_401_TEXT ),
-	            @ApiResponse(code = ResourceConstants.CODE_403, message = ResourceConstants.CODE_403_TEXT ),
-	            @ApiResponse(code = ResourceConstants.CODE_404, message = "Profile could not be found.") })
-    ResponseEntity<?> personalityInsight(@PathVariable String inputText) {
-    	
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@RequestMapping(value = "/{inputText}", method = RequestMethod.GET)
+	@ApiOperation(value = "Returns a profile of the personality analisys", notes = "Returns a profile of the personality analisys", response = Profile.class, responseContainer = "Profile")
+	@ApiResponses(value = {
+			@ApiResponse(code = ResourceConstants.CODE_401, message = ResourceConstants.CODE_401_TEXT),
+			@ApiResponse(code = ResourceConstants.CODE_403, message = ResourceConstants.CODE_403_TEXT),
+			@ApiResponse(code = ResourceConstants.CODE_404, message = "Profile could not be found.") })
+	ResponseEntity<?> personalityInsight(@PathVariable String inputText) {
+
 		try {
-			logger.debug("analysing infant personality on input text: {}", inputText);
-			Profile profile = this.personalityAnalisysService.analysePersonality(inputText);
-			
+			logger.debug("analysing infant personality on input text: {}",
+					inputText);
+			Profile profile = this.personalityAnalisysService
+					.analysePersonality(inputText);
+
 			if (profile == null) {
 				logger.debug("resulting analysis profile for input text is null");
 				return new ResponseEntity(HttpStatus.NOT_FOUND);
 			}
-	    	
-	    	return new ResponseEntity(profile, HttpStatus.OK);
+
+			return new ResponseEntity(profile, HttpStatus.OK);
 		} catch (DomainComponentException e) {
 			return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-    
-    @SuppressWarnings({ "unchecked", "rawtypes" })
-    @RequestMapping(value = "/translate/{inputText}/{source}/{target}", method = RequestMethod.GET)
-    ResponseEntity<?> translateText(@PathVariable String inputText, @PathVariable String source, @PathVariable String target) {
-    	
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@RequestMapping(value = "/translate/{inputText}/{source}/{target}", method = RequestMethod.GET)
+	@ApiOperation(value = "Returns a translation of given input text, from source to target language", notes = "Returns a translation of given input text, from source to target language", response = TranslationResult.class, responseContainer = "TranslationResult")
+	@ApiResponses(value = {
+			@ApiResponse(code = ResourceConstants.CODE_401, message = ResourceConstants.CODE_401_TEXT),
+			@ApiResponse(code = ResourceConstants.CODE_403, message = ResourceConstants.CODE_403_TEXT),
+			@ApiResponse(code = ResourceConstants.CODE_404, message = "Profile could not be found.") })
+	ResponseEntity<?> translateText(@PathVariable String inputText,
+			@PathVariable String source, @PathVariable String target) {
+
 		try {
-			logger.debug("analysing infant personality on input text: {}", inputText);
-			TranslationResult translationResult = this.translateService.translate(inputText, source, target);
-			
+			logger.debug("analysing infant personality on input text: {}",
+					inputText);
+			TranslationResult translationResult = this.translateService
+					.translate(inputText, source, target);
+
 			if (translationResult == null) {
 				logger.debug("resulting analysis profile for input text is null");
 				return new ResponseEntity(HttpStatus.NO_CONTENT);
 			}
-	    	
-	    	return new ResponseEntity(translationResult, HttpStatus.OK);
+
+			return new ResponseEntity(translationResult, HttpStatus.OK);
 		} catch (DomainComponentException e) {
 			return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
