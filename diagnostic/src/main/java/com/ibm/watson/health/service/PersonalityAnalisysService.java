@@ -1,6 +1,5 @@
 package com.ibm.watson.health.service;
 
-import com.ibm.watson.developer_cloud.language_translation.v2.model.TranslationResult;
 import com.ibm.watson.developer_cloud.personality_insights.v2.model.Profile;
 import com.ibm.watson.health.utilities.service.exception.DomainComponentException;
 
@@ -8,5 +7,4 @@ import com.ibm.watson.health.utilities.service.exception.DomainComponentExceptio
 public interface PersonalityAnalisysService {
 
 	Profile analysePersonality(String inputText) throws DomainComponentException;
-	TranslationResult translateText(String inputText) throws DomainComponentException;
 }

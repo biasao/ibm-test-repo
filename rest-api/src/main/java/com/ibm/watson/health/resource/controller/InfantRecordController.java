@@ -19,7 +19,12 @@ import com.ibm.watson.developer_cloud.personality_insights.v2.model.Profile;
 import com.ibm.watson.health.entity.InfantRecord;
 import com.ibm.watson.health.service.InfantRecordService;
 import com.ibm.watson.health.service.PersonalityAnalisysService;
+import com.ibm.watson.health.service.TranslateService;
+import com.ibm.watson.health.utilities.service.ResourceConstants;
 import com.ibm.watson.health.utilities.service.exception.DomainComponentException;
+import com.wordnik.swagger.annotations.ApiOperation;
+import com.wordnik.swagger.annotations.ApiResponse;
+import com.wordnik.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping("/infantRecord")
@@ -30,6 +35,9 @@ public class InfantRecordController {
     
     @Inject
     private PersonalityAnalisysService personalityAnalisysService;
+    
+    @Inject
+    private TranslateService translateService;
     
     private static Logger logger =  LoggerFactory.getLogger(InfantRecordController.class);
     
@@ -61,6 +69,10 @@ public class InfantRecordController {
     
     @SuppressWarnings({ "unchecked", "rawtypes" })
     @RequestMapping(value = "/{inputText}", method = RequestMethod.GET)
+	@ApiOperation(value = "List all DTCs by id" , notes = "Returns a DTC", response = Profile.class, responseContainer = "Profile" )
+	    @ApiResponses(value = { @ApiResponse(code = ResourceConstants.CODE_401, message = ResourceConstants.CODE_401_TEXT ),
+	            @ApiResponse(code = ResourceConstants.CODE_403, message = ResourceConstants.CODE_403_TEXT ),
+	            @ApiResponse(code = ResourceConstants.CODE_404, message = "Profile could not be found.") })
     ResponseEntity<?> personalityInsight(@PathVariable String inputText) {
     	
 		try {
@@ -69,7 +81,7 @@ public class InfantRecordController {
 			
 			if (profile == null) {
 				logger.debug("resulting analysis profile for input text is null");
-				return new ResponseEntity(HttpStatus.NO_CONTENT);
+				return new ResponseEntity(HttpStatus.NOT_FOUND);
 			}
 	    	
 	    	return new ResponseEntity(profile, HttpStatus.OK);
@@ -80,11 +92,11 @@ public class InfantRecordController {
     
     @SuppressWarnings({ "unchecked", "rawtypes" })
     @RequestMapping(value = "/translate/{inputText}", method = RequestMethod.GET)
-    ResponseEntity<?> translateText(@PathVariable String inputText) {
+    ResponseEntity<?> translateText(@PathVariable String inputText, @PathVariable String source, @PathVariable String target) {
     	
 		try {
 			logger.debug("analysing infant personality on input text: {}", inputText);
-			TranslationResult translationResult = this.personalityAnalisysService.translateText(inputText);
+			TranslationResult translationResult = this.translateService.translate(inputText, source, target);
 			
 			if (translationResult == null) {
 				logger.debug("resulting analysis profile for input text is null");

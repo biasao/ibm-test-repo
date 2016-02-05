@@ -21,5 +21,11 @@
 			<artifactId>java-wrapper</artifactId>
 			<version>1.0.2</version>
 		</dependency>
+		<!-- Swagger server integration dependency -->
+	    <dependency >
+			<groupId >com.wordnik </groupId>
+			<artifactId >swagger-jaxrs_2.11 </artifactId>
+			<version>1.3.10</version>
+	    </dependency>
 	</dependencies>
 </project>
