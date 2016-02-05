@@ -14,12 +14,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ibm.watson.developer_cloud.concept_insights.v2.model.Annotations;
 import com.ibm.watson.developer_cloud.language_translation.v2.model.TranslationResult;
 import com.ibm.watson.developer_cloud.personality_insights.v2.model.Profile;
 import com.ibm.watson.health.entity.InfantRecord;
 import com.ibm.watson.health.service.InfantRecordService;
 import com.ibm.watson.health.service.PersonalityAnalisysService;
 import com.ibm.watson.health.service.TranslateService;
+import com.ibm.watson.health.service.ConceptInsightsService;
 import com.ibm.watson.health.utilities.service.ResourceConstants;
 import com.ibm.watson.health.utilities.service.exception.DomainComponentException;
 import com.wordnik.swagger.annotations.ApiOperation;
@@ -38,6 +40,9 @@ public class InfantRecordController {
 
 	@Inject
 	private TranslateService translateService;
+	
+	@Inject
+	private ConceptInsightsService conceptInsightsService;
 
 	private static Logger logger = LoggerFactory
 			.getLogger(InfantRecordController.class);
@@ -117,6 +122,32 @@ public class InfantRecordController {
 			}
 
 			return new ResponseEntity(translationResult, HttpStatus.OK);
+		} catch (DomainComponentException e) {
+			return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@RequestMapping(value = "/conceptInsight/{inputText}", method = RequestMethod.GET)
+	@ApiOperation(value = "Returns concept insight of given input text.", notes = "Returns concept insight of given input text", response = Annotations.class, responseContainer = "Annotations")
+	@ApiResponses(value = {
+			@ApiResponse(code = ResourceConstants.CODE_401, message = ResourceConstants.CODE_401_TEXT),
+			@ApiResponse(code = ResourceConstants.CODE_403, message = ResourceConstants.CODE_403_TEXT),
+			@ApiResponse(code = ResourceConstants.CODE_404, message = "No concept insight could be found.") })
+	ResponseEntity<?> conceptInsight(@PathVariable String inputText) {
+
+		try {
+			logger.debug("analysing concept insights for given input text: {}",
+					inputText);
+			Annotations annotations = this.conceptInsightsService
+					.conceptInsight(inputText);
+
+			if (annotations == null) {
+				logger.debug("resulting concept insight analisys is null");
+				return new ResponseEntity(HttpStatus.NO_CONTENT);
+			}
+
+			return new ResponseEntity(annotations, HttpStatus.OK);
 		} catch (DomainComponentException e) {
 			return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
