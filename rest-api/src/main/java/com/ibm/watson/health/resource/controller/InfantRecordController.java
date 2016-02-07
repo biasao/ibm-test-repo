@@ -20,11 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ibm.watson.developer_cloud.concept_insights.v2.model.Annotations;
 import com.ibm.watson.developer_cloud.language_translation.v2.model.TranslationResult;
-import com.ibm.watson.developer_cloud.personality_insights.v2.model.Profile;
 import com.ibm.watson.health.entity.InfantRecord;
 import com.ibm.watson.health.service.ConceptInsightsService;
 import com.ibm.watson.health.service.InfantRecordService;
-import com.ibm.watson.health.service.PersonalityAnalisysService;
 import com.ibm.watson.health.service.TranslateService;
 import com.ibm.watson.health.utilities.service.ResourceConstants;
 import com.ibm.watson.health.utilities.service.exception.DomainComponentException;
@@ -35,9 +33,6 @@ public class InfantRecordController {
 
 	@Inject
 	private InfantRecordService infantRecordService;
-
-	@Inject
-	private PersonalityAnalisysService personalityAnalisysService;
 
 	@Inject
 	private TranslateService translateService;
@@ -70,32 +65,6 @@ public class InfantRecordController {
 					.listAll();
 
 			return new ResponseEntity(infantRecords, HttpStatus.OK);
-		} catch (DomainComponentException e) {
-			return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
-
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	@RequestMapping(value = "/{inputText}", method = RequestMethod.GET)
-	@ApiOperation(value = "Returns a profile of the personality analisys", notes = "Returns a profile of the personality analisys", response = Profile.class, responseContainer = "Profile")
-	@ApiResponses(value = {
-			@ApiResponse(code = ResourceConstants.CODE_401, message = ResourceConstants.CODE_401_TEXT),
-			@ApiResponse(code = ResourceConstants.CODE_403, message = ResourceConstants.CODE_403_TEXT),
-			@ApiResponse(code = ResourceConstants.CODE_404, message = "Profile could not be found.") })
-	ResponseEntity<?> personalityInsight(@PathVariable String inputText) {
-
-		try {
-			logger.debug("analysing infant personality on input text: {}",
-					inputText);
-			Profile profile = this.personalityAnalisysService
-					.analysePersonality(inputText);
-
-			if (profile == null) {
-				logger.debug("resulting analysis profile for input text is null");
-				return new ResponseEntity(HttpStatus.NOT_FOUND);
-			}
-
-			return new ResponseEntity(profile, HttpStatus.OK);
 		} catch (DomainComponentException e) {
 			return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
