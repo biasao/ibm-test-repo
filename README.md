@@ -10,4 +10,4 @@ This is a prototype java application using IBM Watson services in Bluemix cloud 
 </ol>
 # prototype application.
 The prototype is published in Bluemix cloud platform at http://ibm-watson-test-app.mybluemix.net
-The code is being publicly stored <a href="https://github.com/biasao/ibm-watson-test-app"> here at github repository</a>, and staged on <a href="https://hub.jazz.net"> IBM jazz</a>, in a Continuous Integration fashion
+The code is being publicly stored <a href="https://github.com/biasao/ibm-watson-test-app"> here at github repository</a>, and staged on <a href="https://hub.jazz.net"> IBM jazz</a> -- Continuous Integration.
