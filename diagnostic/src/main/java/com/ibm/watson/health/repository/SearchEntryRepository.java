@@ -8,6 +8,7 @@ import com.ibm.watson.health.entity.SearchEntry;
 
 public interface SearchEntryRepository extends MongoRepository<SearchEntry, String> {
 
-	public SearchEntry findByFirstName(String firstName);
-    public List<SearchEntry> findByLastName(String lastName);
+	public List<SearchEntry> findByEntry(String entry);
+	public List<SearchEntry> findBySourceLanguage(String entry);
+
 }
