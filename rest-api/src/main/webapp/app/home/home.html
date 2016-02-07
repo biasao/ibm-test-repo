@@ -1,0 +1,18 @@
+
+<div ng-init="init()">
+	<div class="k-block">
+
+		<div class="pds-title">Search tool</div>
+
+		<div style="height: 40px">
+			<h3 style="background-color: #ffffff">Search tool</h3>
+		</div>
+
+		<div id="searchedEntriesGrid" kendo-grid="entries"
+			k-options="searchedEntriesOptions"
+			k-columns="searchedEntriesGridColumns"
+			k-data-source="searchedConceptEntriesDataSource" k-selectable="true"
+			style="height: 65vh"></div>
+
+	</div>
+</div>
