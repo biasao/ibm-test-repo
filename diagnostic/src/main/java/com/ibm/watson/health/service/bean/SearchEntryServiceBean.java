@@ -5,20 +5,20 @@ import javax.inject.Named;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.ibm.watson.health.entity.InfantRecord;
-import com.ibm.watson.health.repository.InfantRecordRepository;
-import com.ibm.watson.health.service.InfantRecordService;
+import com.ibm.watson.health.entity.SearchEntry;
+import com.ibm.watson.health.repository.SearchEntryRepository;
+import com.ibm.watson.health.service.SearchEntryService;
 import com.ibm.watson.health.utilities.service.exception.DomainComponentException;
 import com.ibm.watson.health.utilities.service.impl.AbstractCrudService;
 
 @Named
-public class InfantRecordServiceBean extends AbstractCrudService<InfantRecord, String> implements InfantRecordService {
+public class SearchEntryServiceBean extends AbstractCrudService<SearchEntry, String> implements SearchEntryService {
 
 	@Inject
-	private InfantRecordRepository repository;
+	private SearchEntryRepository repository;
 	
 	@Override
-	public CrudRepository<InfantRecord, String> getCrudRepository()
+	public CrudRepository<SearchEntry, String> getCrudRepository()
 			throws DomainComponentException {
 		
 		return repository;
