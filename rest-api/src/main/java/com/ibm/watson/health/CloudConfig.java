@@ -5,9 +5,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.MongoDbFactory;
 
-//@Configuration
+@Configuration
 public class CloudConfig extends AbstractCloudConfig {
-  //@Bean
+  @Bean
   public MongoDbFactory documentMongoDbFactory() {
       return connectionFactory().mongoDbFactory();
   }
