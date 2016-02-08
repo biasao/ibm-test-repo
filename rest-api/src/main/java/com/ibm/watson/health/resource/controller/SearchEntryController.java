@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.google.common.collect.Lists;
 import com.ibm.watson.health.entity.SearchEntry;
 import com.ibm.watson.health.service.SearchEntryService;
 import com.ibm.watson.health.utilities.service.exception.DomainComponentException;
@@ -50,7 +51,9 @@ public class SearchEntryController {
 			List<SearchEntry> entries = this.searchEntryService
 					.listAll();
 
-			return new ResponseEntity(entries, HttpStatus.OK);
+			List<SearchEntry> sortedByInsertion = Lists.reverse(entries);
+			
+			return new ResponseEntity(sortedByInsertion, HttpStatus.OK);
 		} catch (DomainComponentException e) {
 			return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
