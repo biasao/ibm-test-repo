@@ -39,7 +39,7 @@ public class ConceptInsightController {
 			@ApiResponse(code = ResourceConstants.CODE_403, message = ResourceConstants.CODE_403_TEXT),
 			@ApiResponse(code = ResourceConstants.CODE_404, message = "No concept insight could be found.") })
 	ResponseEntity<?> conceptInsight(@PathVariable String inputText) {
-
+		System.out.println("analysing concept insights for given input text: {}"+inputText);
 		try {
 			logger.debug("analysing concept insights for given input text: {}",
 					inputText);

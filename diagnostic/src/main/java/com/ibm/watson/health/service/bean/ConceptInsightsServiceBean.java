@@ -40,6 +40,7 @@ public class ConceptInsightsServiceBean implements ConceptInsightsService {
 	
 	@Override
 	public Annotations conceptInsight(final String text) throws DomainComponentException {
+		System.out.println("Input text for concept insights: {}" + text);
 		logger.debug("Input text for concept insights: {}", text);
 		String identifiedLanguage = identifyMostLikelyLanguage(text);
 		
