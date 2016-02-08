@@ -24,7 +24,8 @@ jsUi.controller('HomeController', ['serverURL', '$http', '$scope',
  	});
 	
 	this.conceptInsights = function() {
-		$http.get(questions_url, {cache : false}).success(function(data) {
+		alert($scope.inputTextSearch.value);
+		$http.get(serverURL.url + "/conceptInsight/" + $scope.inputTextSearch.value, {cache : false}).success(function(data) {
 
 			if (data.length > 0){
 				$(data).each(function(index){
