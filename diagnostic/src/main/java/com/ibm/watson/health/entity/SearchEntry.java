@@ -77,4 +77,20 @@ public class SearchEntry implements Serializable {
 	public void setConceptInsights(List<String> conceptInsights) {
 		this.conceptInsights = conceptInsights;
 	}
+	
+	public String getConceptInsightsStr() {
+		if (conceptInsights == null) {
+			return "";
+		}
+		
+		String conceptInsightsStr = "";
+		for (int i = 0; i < conceptInsights.size(); i++) {
+			conceptInsightsStr += conceptInsights.get(i);
+			if (i < conceptInsights.size() - 1) {
+				conceptInsightsStr += ",";
+			}
+		}
+		
+		return conceptInsightsStr;
+	}
 }
