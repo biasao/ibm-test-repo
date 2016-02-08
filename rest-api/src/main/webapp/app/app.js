@@ -6,7 +6,7 @@ angular.module('jsUiApp', [
   'ngCookies'
 ])
   .constant("serverURL", {
-    "url": "http://" + window.location.hostname + ":8080/rest-api"
+    "url": "http://" + window.location.hostname + "/rest-api"
   })
 
   .config(function ($routeProvider, $locationProvider) {
