@@ -85,7 +85,7 @@ public class SearchEntry implements Serializable {
 		
 		String conceptInsightsStr = "";
 		for (int i = 0; i < conceptInsights.size(); i++) {
-			conceptInsightsStr += "https://en.wikipedia.org/wiki/" 
+			conceptInsightsStr += "wikipedia.org/wiki/" 
 					+ conceptInsights.get(i);
 			
 			if (i < conceptInsights.size() - 1) {
