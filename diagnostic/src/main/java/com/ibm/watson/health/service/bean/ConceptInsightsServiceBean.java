@@ -40,7 +40,7 @@ public class ConceptInsightsServiceBean implements ConceptInsightsService {
 	
 	@Override
 	public Annotations conceptInsight(final String text) throws DomainComponentException {
-		logger.debug("Input text for concept insights: {}", text);
+		logger.info("Input text for concept insights: {}", text);
 		String identifiedLanguage = identifyMostLikelyLanguage(text);
 		
 		final String translatedText = translateToEnglishForBetterResult(identifiedLanguage, text);
@@ -74,7 +74,7 @@ public class ConceptInsightsServiceBean implements ConceptInsightsService {
 			String text) throws DomainComponentException {
 
 		if (EN.equals(identifiedLanguage)) {
-			logger.debug("No translation needed, text already in English.");
+			logger.info("No translation needed, text already in English.");
 			return text;
 		}
 		
@@ -86,7 +86,7 @@ public class ConceptInsightsServiceBean implements ConceptInsightsService {
 		}
 		
 		final String topTranslatedText = translationResult.getTranslations().get(0).getTranslation();
-		logger.debug("Most likely translation: {}", topTranslatedText);
+		logger.info("Most likely translation: {}", topTranslatedText);
 		
 		return topTranslatedText;
 	}
@@ -100,7 +100,7 @@ public class ConceptInsightsServiceBean implements ConceptInsightsService {
 		}
 		
 		final String mostLikelyLanguage = identifiedLanguages.get(0).getLanguage();
-		logger.debug("Most likely input language: {}", mostLikelyLanguage);
+		logger.info("Most likely input language: {}", mostLikelyLanguage);
 		
 		return mostLikelyLanguage;
 	}
