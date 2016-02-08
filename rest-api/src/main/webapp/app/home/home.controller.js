@@ -4,7 +4,8 @@ jsUi.controller('HomeController', ['serverURL', '$http', '$scope',
 	function(serverURL, $http, $scope) {
 
 	$scope.searchedEntriesGridColumns = [
-       		{field: "entry", title: "Searched entry", width: "100%"}
+       		{field: "entry", title: "Searched entry", width: "30%"},
+       		{field: "conceptInsights", title: "Concept insights", width: "70%"}
        	];
 
     $scope.searchedEntriesOptions = {
