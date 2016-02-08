@@ -48,15 +48,28 @@ public class ConceptInsightsServiceBean implements ConceptInsightsService {
 		final ConceptInsights service = new ConceptInsights();
 		service.setUsernameAndPassword(USER, PASSWORD);
 
+
+		logger.info("Looking in Wikepedia for concepts related to: {}", translatedText);
 		Annotations annotations =
-			service.annotateText(Graph.WIKIPEDIA,text);
+			service.annotateText(Graph.WIKIPEDIA,translatedText);
 	    
 		final List<String> conceptInsights = retrieveConceptInsights(annotations);
 		
-		logger.debug("Store log entry: {}|{}|{}", text, identifiedLanguage, translatedText);
-		searchEntryService.save(new SearchEntry(text, identifiedLanguage, translatedText, conceptInsights));
+		saveSearchEntry(text, identifiedLanguage, translatedText,
+				conceptInsights);
 		
 	    return annotations;
+	}
+
+	private void saveSearchEntry(final String text, String identifiedLanguage,
+			final String translatedText, final List<String> conceptInsights)
+			throws DomainComponentException {
+		
+		logger.info("Store log entry: {}|{}|{}", text, identifiedLanguage, translatedText);
+		for(String concept : conceptInsights) {
+			logger.info("Insighted concept: {}", concept);
+		}
+		searchEntryService.save(new SearchEntry(text, identifiedLanguage, translatedText, conceptInsights));
 	}
 
 	private List<String> retrieveConceptInsights(Annotations annotations) {
