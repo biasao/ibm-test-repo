@@ -43,6 +43,11 @@ public class ConceptInsightsServiceBean implements ConceptInsightsService {
 		logger.info("Input text for concept insights: {}", text);
 		String identifiedLanguage = identifyMostLikelyLanguage(text);
 		
+		if (!isSupportedLanguage(identifiedLanguage)) {
+			logger.info("Language is not supported: {}", identifiedLanguage);
+			return null;
+		}
+		
 		final String translatedText = translateToEnglishForBetterResult(identifiedLanguage, text);
 		
 		final ConceptInsights service = new ConceptInsights();
@@ -59,6 +64,10 @@ public class ConceptInsightsServiceBean implements ConceptInsightsService {
 				conceptInsights);
 		
 	    return annotations;
+	}
+
+	private boolean isSupportedLanguage(String identifiedLanguage) throws DomainComponentException {
+		return translateService.isSupportedLanguage(identifiedLanguage);
 	}
 
 	private void saveSearchEntry(final String text, String identifiedLanguage,

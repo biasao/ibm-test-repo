@@ -10,4 +10,5 @@ public interface TranslateService {
 
 	TranslationResult translate(final String text,final String source,final String target) throws DomainComponentException;
 	List<IdentifiedLanguage> identifyLanguage(final String text) throws DomainComponentException;
+	Boolean isSupportedLanguage(String language) throws DomainComponentException;
 }
