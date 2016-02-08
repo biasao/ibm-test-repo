@@ -90,7 +90,7 @@ public class SearchEntry implements Serializable {
 			
 			if (i < conceptInsights.size() - 1) {
 				
-				conceptInsightsStr += "<br/>";
+				conceptInsightsStr += ", ";
 			}
 		}
 		
