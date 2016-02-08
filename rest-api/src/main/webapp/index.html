@@ -32,15 +32,11 @@
 <div id="primaryContainer" class="primaryContainer clearfix">
   <div id="WindowArea" class="clearfix">
 
-    <pds-header></pds-header>
-
     <div id="CenterArea" class="clearfix">
       <div id="ContentArea" class="clearfix" ng-view="">
         <!--Add your content Page Here-->
       </div>
     </div>
-
-    <div ng-include="'footer.html'"></div>
 
     <span kendo-notification="globalNotificationPanel"
           k-options="msgPanelOptions"

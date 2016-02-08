@@ -23,4 +23,16 @@ jsUi.controller('HomeController', ['serverURL', '$http', '$scope',
  		}
  	});
 	
+	this.conceptInsights = function() {
+		$http.get(questions_url, {cache : false}).success(function(data) {
+
+			if (data.length > 0){
+				$(data).each(function(index){
+					var annotations = $(this).get(0);
+					console.log(annotations);
+				});
+			}
+		});
+	};
+    
 }]);
