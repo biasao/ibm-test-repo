@@ -35,8 +35,12 @@ jsUi.controller('HomeController', ['serverURL', '$http', '$scope',
 			}
 		});
 		
-		$('#searchedEntriesGrid').data('kendoGrid').dataSource.read();
-		$('#searchedEntriesGrid').data('kendoGrid').refresh();
+		setTimeout(function() {
+				console.log('refreshing grid...');
+				$('#searchedEntriesGrid').data('kendoGrid').dataSource.read();
+				$('#searchedEntriesGrid').data('kendoGrid').refresh();
+			}, 3000);
+		
 	};
     
 }]);
